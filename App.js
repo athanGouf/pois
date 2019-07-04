@@ -1,19 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Button, View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello to all!</Text>
-    </View>
-  );
+class HomeScreen extends React.Component {
+  render() {
+    return (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text>Home Screen</Text>
+          <Button
+              title="Go to Details"
+              onPress={() => this.props.navigation.navigate('Details')}
+          />
+        </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+          <Text>Details Screen</Text>
+        </View>
+    );
+  }
+}
+
+
+const AppNavigator = createStackNavigator(
+   {
+    Home: HomeScreen,
+    Details: DetailsScreen
   },
-});
+  {
+    initialRouteName: "Home"
+  });
+
+export default createAppContainer(AppNavigator);
