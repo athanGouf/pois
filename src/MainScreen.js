@@ -12,6 +12,7 @@ const MainScreen = class MainScreen extends React.Component {
       latitude: null,
       longitude: null,
       error: null,
+      points:[]
     };
   }
 
@@ -27,9 +28,26 @@ const MainScreen = class MainScreen extends React.Component {
         (error) => this.setState({ error: error.message }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
+    fetch('https://warply.s3.amazonaws.com/data/test_pois.json',{
+      method: 'get'
+    })
+    .then((response) => response.json())
+    .then(responseJson => {
+      this.setState({
+        points: responseJson
+      })
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
+
   render() {
+    let point = this.state.points[0]
+    console.log(point ? point.address : undefined)
     return (
+
         <ScrollableTabView renderTabBar={() => <DefaultTabBar />}>
           <PointsOfInterests
               tabLabel={'POIs'}
@@ -40,13 +58,11 @@ const MainScreen = class MainScreen extends React.Component {
 
           <Map
             tabLabel = {'Map'}
+            lat = {this.state.latitude}
+            long = {this.state.longitude}
           />
 
-          {/*<View key={'2'} tabLabel={'loc tab '} style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Text>Lat: {this.state.latitude}</Text>
-            <Text>Long: {this.state.longitude}</Text>
-            {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
-          </View>*/}
+
         </ScrollableTabView>
     );
   }

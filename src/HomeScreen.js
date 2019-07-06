@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, View, Text } from "react-native";
+import MapView from 'react-native-maps';
 
 const HomeScreen = class HomeScreen extends React.Component {
   render() {
