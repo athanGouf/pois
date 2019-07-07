@@ -43,9 +43,14 @@ const MainScreen = class MainScreen extends React.Component {
     });
   }
 
+  get selectPOIs(){
+      if(!this.state.points.length){
+        return undefined;
+      }
+      return this.state.points;
+    }
+
   render() {
-    let point = this.state.points[0]
-    console.log(point ? point.address : undefined)
     return (
 
         <ScrollableTabView renderTabBar={() => <DefaultTabBar />}>
@@ -54,6 +59,7 @@ const MainScreen = class MainScreen extends React.Component {
               lat = {this.state.latitude}
               long = {this.state.longitude}
               error = {this.state.error}
+              points = {this.selectPOIs}
           />
 
           <Map
