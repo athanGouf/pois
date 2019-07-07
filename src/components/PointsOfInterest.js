@@ -31,7 +31,7 @@ const PointsOfInterest = ({lat,long,error,points}) => {
           <FlatList
             data={points}
             renderItem={({ item }) => (
-              <Text>
+              <Text key={item.id}>
               {
                `${item.address} ${
                   Math.floor(

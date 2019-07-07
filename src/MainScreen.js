@@ -66,6 +66,8 @@ const MainScreen = class MainScreen extends React.Component {
             tabLabel = {'Map'}
             lat = {this.state.latitude}
             long = {this.state.longitude}
+            error = {this.state.error}
+            points = {this.selectPOIs}
           />
 
 

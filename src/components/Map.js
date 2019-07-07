@@ -1,25 +1,40 @@
 import React from "react"
 import { Text, View} from "react-native";
-import MapView, { Marker } from 'react-native-maps'
+import { Marker } from 'react-native-maps'
+import MapView from 'react-native-map-clustering';
 
+function markers(pois){
+  const markerList = pois.map(i =>(
+      <Marker
+        key = {i.id}
+        coordinate={{
+          latitude: i.latitude ? Number(i.latitude) : 0,
+          longitude: i.longitude ? Number(i.longitude) : 0
+        }}
 
-const Map = ({lat, long}) => (
+      />
+
+    )
+
+  );
+  return markerList
+}
+
+const Map = ({lat,long,error,points}) => {
+  /*console.log(typeof points[0].longitude)*/
+    return (
     <MapView
         style={{flex: 1}}
         region={{
-          latitude: lat,
-          longitude: long,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: 38.3680894,
+          longitude: 23.0905798,
+          latitudeDelta: 0.9,
+          longitudeDelta: 0.9,
         }}
       >
-      <Marker
-          coordinate={{
-            latitude: lat,
-            longitude: long
-          }}
-      />
+        {markers(points)}
       </MapView>
-);
+  )
+}
 
 export default Map
