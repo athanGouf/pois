@@ -5,6 +5,7 @@ import PointsOfInterests from "./components/PointsOfInterest"
 import Map from "./components/Map"
 
 
+
 const MainScreen = class MainScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,22 @@ const MainScreen = class MainScreen extends React.Component {
   }
 
   componentDidMount() {
+
+    fetch('https://warply.s3.amazonaws.com/data/test_pois.json',{
+          method: 'get'
+        })
+        .then((response) => response.json())
+        .then(responseJson => {
+          this.setState({
+            points: responseJson
+          })
+
+        })
+        .catch((error) => {
+          console.error(error);
+
+        });
+
     navigator.geolocation.getCurrentPosition(
         (position) => {
           this.setState({
@@ -29,25 +46,12 @@ const MainScreen = class MainScreen extends React.Component {
         (error) => this.setState({ error: error.message }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
-    fetch('https://warply.s3.amazonaws.com/data/test_pois.json',{
-      method: 'get'
-    })
-    .then((response) => response.json())
-    .then(responseJson => {
-      this.setState({
-        points: responseJson
-      })
 
-    })
-    .catch((error) => {
-      console.error(error);
-
-    });
   }
 
   get selectPOIs(){
       if(!this.state.points.length){
-        return undefined;
+        return [];
       }
       return this.state.points;
     }

@@ -23,7 +23,7 @@ function deg2rad(deg) {
 }
 
 function sortedList(lat,long,error,points){
-  if(!error && points){
+  if(!error){
     const rowList = points.map(i=>{
       const distance =
         Math.floor(
@@ -35,46 +35,45 @@ function sortedList(lat,long,error,points){
         )/100;
 
         return {
+          id: i.id,
           address: i.address,
           distance: distance
         }
     })
-    rowList.sort((x,y)=> y.distance-x.distance)
+    rowList.sort((x,y)=> x.distance-y.distance)
     return rowList
   }
-  return {
-    address: '',
-    distance: ''
-  }
+  const address = points.map(i=>({
+                    id: i.id,
+                    address: i.address,
+                    distance:''
+                  })
+                )
+  return address.sort(function(a, b) {
+                          let textA = a.address.toUpperCase();
+                          let textB = b.address.toUpperCase();
+                          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                      })
+
 }
 
 const PointsOfInterest = ({lat,long,error,points}) => {
 
-  console.log(sortedList(lat,long,error,points))
 
   return (
       <View style={styles.container}>
           <FlatList
-            data={points}
+            data={sortedList(lat,long,error,points)}
             renderItem={({ item }) => (
               <View style={styles.row}>
-              <Text style = {styles.address}key={item.id}>
-              {
-               item.address
-              }
+              <Text style = {styles.address} key={item.id}>
+                {item.address}
               </Text>
               <Text style = {styles.distance}>
-                {
-                  Math.floor(
-                    getDistanceFromLatLonInKm(
-                      item.latitude,
-                      item.longitude,
-                      lat,
-                      long)*100
-                      )/100
-                }km
+                {item.distance}
               </Text>
               </View>
+
             )}
             keyExtractor={item => item.id.toString()}
            />
