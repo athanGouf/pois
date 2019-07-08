@@ -4,6 +4,7 @@ import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native
 import PointsOfInterests from "./components/PointsOfInterest"
 import Map from "./components/Map"
 
+
 const MainScreen = class MainScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,7 @@ const MainScreen = class MainScreen extends React.Component {
     })
     .catch((error) => {
       console.error(error);
+
     });
   }
 
@@ -69,6 +71,7 @@ const MainScreen = class MainScreen extends React.Component {
             error = {this.state.error}
             points = {this.selectPOIs}
           />
+
 
 
         </ScrollableTabView>

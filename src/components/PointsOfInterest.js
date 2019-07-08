@@ -1,5 +1,5 @@
 import React from "react"
-import {Text, View, FlatList} from "react-native";
+import {Text, View, FlatList, StyleSheet} from "react-native";
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -22,18 +22,49 @@ function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
 
+function sortedList(lat,long,error,points){
+  if(!error && points){
+    const rowList = points.map(i=>{
+      const distance =
+        Math.floor(
+          getDistanceFromLatLonInKm(
+            i.latitude,
+            i.longitude,
+            lat,long
+          )*100
+        )/100;
+
+        return {
+          address: i.address,
+          distance: distance
+        }
+    })
+    rowList.sort((x,y)=> y.distance-x.distance)
+    return rowList
+  }
+  return {
+    address: '',
+    distance: ''
+  }
+}
 
 const PointsOfInterest = ({lat,long,error,points}) => {
 
+  console.log(sortedList(lat,long,error,points))
 
   return (
-      <View style="flex: 1">
+      <View style={styles.container}>
           <FlatList
             data={points}
             renderItem={({ item }) => (
-              <Text key={item.id}>
+              <View style={styles.row}>
+              <Text style = {styles.address}key={item.id}>
               {
-               `${item.address} ${
+               item.address
+              }
+              </Text>
+              <Text style = {styles.distance}>
+                {
                   Math.floor(
                     getDistanceFromLatLonInKm(
                       item.latitude,
@@ -41,13 +72,34 @@ const PointsOfInterest = ({lat,long,error,points}) => {
                       lat,
                       long)*100
                       )/100
-                   }km`
-              }
+                }km
               </Text>
+              </View>
             )}
+            keyExtractor={item => item.id.toString()}
            />
       </View>
   )
 }
 
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    padding:'5%'
+  },
+  row:{
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    flexDirection:'row',
+    marginBottom: '2%'
+  },
+  address:{
+    width: '70%'
+  },
+  distance:{
+    width: '30%',
+    paddingLeft:'5%',
+    color:'#1183ca'
+  }
+})
 export default PointsOfInterest
