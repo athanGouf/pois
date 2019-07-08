@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e191b432-5b5b-4257-8693-33597b8cf316" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PointsOfInterest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PointsOfInterest.js" afterDir="false" />
-    </list>
+    <list default="true" id="e191b432-5b5b-4257-8693-33597b8cf316" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1562606033616</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Sort points">
+      <created>1562611035007</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1562611035007</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -312,7 +315,8 @@
     <MESSAGE value="Points of Interest Tab" />
     <MESSAGE value="Markers" />
     <MESSAGE value="beforeTryAsync" />
-    <option name="LAST_COMMIT_MESSAGE" value="beforeTryAsync" />
+    <MESSAGE value="Sort points" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sort points" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties" />
